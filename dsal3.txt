@@ -1,0 +1,135 @@
+#include<iostream>
+using namespace std;
+
+class BTT
+{
+private:
+	struct node
+	{
+		int data;
+		node *lc ;
+		node *rc ;
+		int lflag;
+		int rflag;
+	}*header,*root;
+public:
+	BTT()
+	{
+		header = NULL;	
+		root = NULL;
+	}
+	void create();
+	void preorder();
+	void display();
+	//void display();
+};
+
+void BTT::create()
+{
+node *temp,*curr;
+int ans;
+
+	header = new node;
+	header->lc=header;
+	header->rc=header;
+	
+	root = new node;
+	cout<<"enter data of ROOT node : ";
+	cin>>root->data;
+	root->lc=header;
+	root->rc=header;
+	root->lflag=0;
+	root->rflag=0;
+	
+	header->lc=root;
+	
+do
+{
+	temp = new node;
+	cout<<"enter data of new node:";
+	cin>>temp->data;
+	temp->lflag=0;
+	temp->rflag=0;
+	
+	curr = root;
+    while(1)
+    {
+	if(temp->data<curr->data)
+	{
+		if(curr->lflag==0)
+		{	
+			temp->lc=curr->lc;  // formation of left thread of new node temp
+			temp->rc=curr;		// formation of right thread of new node temp		
+			curr->lc=temp;      // formation of left link bet curr and new node temp	
+			curr->lflag=1;
+			break;
+		}
+		else
+			curr=curr->lc;
+	}
+	
+	if(temp->data>curr->data)
+	{
+		if(curr->rflag==0)
+		{	
+			temp->rc=curr->rc;  // formation of right thread of new node temp
+			temp->lc=curr;		// formation of left thread of new node temp		
+			curr->rc=temp;      // formation of right link bet curr and new node temp	
+			curr->rflag=1;
+			break;
+		}
+		else
+			curr=curr->rc;
+	}
+    } // end of infinite while loop
+
+	
+cout<<"do you want to insert one more node(1 or 0)-->";
+cin>>ans;
+}while(ans==1);
+}
+
+void BTT::display()
+{
+	cout<<"preorder traversal is as follows:\n";
+	preorder();
+}
+
+void BTT::preorder()
+{
+	node *t;
+	cout<<"p";
+	if(root==NULL)
+	{
+		cout<<"BTT is empty";
+	
+	}
+	t=root;
+	while(t!=header)
+	{
+		cout<<t->data;
+		if(t->lflag==1)
+		{
+			t=t->lc;
+		}
+		else
+		{
+			while(t->rflag==0)
+			{
+				t=t->rc;
+				if(t==header)
+					break;
+		        }
+		        t=t->rc;
+		}  
+	        
+	}
+}	
+
+int main()
+{
+	BTT a;
+	a.create();
+	a.display();
+	return 0;
+}

@@ -1,0 +1,165 @@
+#include<iostream>
+using namespace std;
+
+class bst
+{
+	private:
+		struct node
+		{
+			int data;
+			node *lc;
+			node *rc;
+		}*root;
+	public:
+		bst()  
+		{
+			root=NULL;
+		}
+		void create();
+		void display();
+		void rec_preorder(node *root);
+		void min();
+		void search();
+		void mir_image();
+};
+
+void bst::create()
+{
+	node *temp,*curr;
+	int ans;
+	do
+	{
+		temp=new node;
+		cout<<"enter data=";
+		cin>>temp->data;
+		temp->lc=NULL;
+		temp->rc=NULL;
+		if(root==NULL)
+			root=temp;
+		else
+		{
+			curr=root;
+			while(1)
+			{
+				if(temp->data<curr->data)
+				{ 
+					if(curr->lc==NULL)
+					{
+						curr->lc=temp;
+						break;
+					}
+					else
+					{
+						curr=curr->lc;
+					}
+				}			
+				if(temp->data>curr->data)
+				{ 
+					if(curr->rc==NULL)
+					{
+						curr->rc=temp;
+						break;
+					}
+					else
+					{
+						curr=curr->rc;
+					}
+				}			
+
+			}
+		}	
+			
+	cout<<"want to insert one more node?->";
+	cin>>ans;
+     }while(ans==1);
+}
+
+void bst::display()
+{
+	rec_preorder(root);
+}
+
+void bst::rec_preorder(node *t)
+{
+	if(t!=NULL)
+	{
+		cout<<" "<<t->data;
+		rec_preorder(t->lc);
+		rec_preorder(t->rc);
+	}
+}
+void bst::min()
+{       
+        node *temp=root;
+	while(temp->lc!=NULL)
+	{
+		temp=temp->lc;
+	}
+	cout<<"\n"<<"minimum value = "<<temp->data;
+}
+
+void bst::search()
+{
+	int key;
+	node *t;
+	if(root==NULL)
+	{
+		cout<<"tree is empty!!";
+	}
+	else
+	{
+		cout<<"\nenter node to be search->";
+	        cin>>key;
+	        t=root;
+	        while(t!=NULL)
+	        {
+	        	if (key==t->data)
+	        	{
+	        	cout<<"key is found->"<<key;
+	        	///return 0;
+	        	}
+	        	else if(key>t->data)
+	        	{
+	        	t=t->lc;
+	        	//cout<<"key is found->"<<key;
+	        	}
+	        	else
+	        	{
+	        	t=t->rc;
+	        	//cout<<"key is found->"<<key;
+	                }
+	        
+	        if(t==NULL)
+	        {
+	        cout<<"key not present!";
+	        }
+	       }
+	}
+}
+
+void bst::mir_image()
+{
+	
+}
+int bst::height(node* root)
+{       
+	if(root==NULL)
+	{
+	return -1;
+	}
+	int lcH=height(root->lc);
+	int rcH=height(root->lc);
+	return 1+MAX(lcH,rcH);
+}
+{
+	
+ int main()
+ {
+	 bst b;
+ 	 b.create();
+	 b.display();
+	 b.min();
+	 b.search();
+	 return 0;
+ }
+ 
