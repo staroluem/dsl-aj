@@ -1,0 +1,66 @@
+from operations import main
+def main():
+  lst=[]
+  n=int(input("enter no. of elements in list:"))
+  read(lst,n)
+  print("MENU\n1.add\n2.delete.\n3.contain\n4.iter\n5.size\n6intersection\n7.union\n8.diff\n9.subset")
+  ch=int(input("enter your choice:")
+  switch(ch):
+  case 1:
+   a=int(input("enter no to be add:")
+   add(a)
+   break
+  case 2:
+   a=int(input("enter no to be delete:")
+   delete(a)
+   break
+  case 3
+   a=int(input("enter:")
+   contains(a)
+   break
+  case 4:
+  #a=int(input("enter:")
+   iterator()
+   break
+  case 5:
+  #a=int(input("enter no to be delete:")
+   size()
+   break
+   
+  case 6:
+  print("intersection oper")
+  for j in range(0,m):
+  p=int(input("Enter element in list:")
+  lst1.append(p)
+  for j in range(0,m):
+  q=int(input("enter elements in list:")
+  lst2.append(q):
+  inter(lst1,lst2)
+  break
+  
+  case 7:
+  print("union oper")
+  for j in range(0,m):
+  p=int(input("Enter element in list:")
+  lst1.append(p)
+  for j in range(0,m):
+  q=int(input("enter elements in list:")
+  lst2.append(q):
+  union(lst1,lst2)
+  break
+
+  case 8:
+  print("diff oper")
+  for j in range(0,m):
+  p=int(input("Enter element in list:")
+  lst1.append(p)
+  for j in range(0,m):
+  q=int(input("enter elements in list:")
+  lst2.append(q):
+  diff(lst1,lst2)
+  break
+  
+  case 9:
+  subset()
+  
+main()
