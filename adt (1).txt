@@ -1,0 +1,51 @@
+#set operation
+def read(lst,n):
+  for i in range (0,n):
+  l=int(input("Enter element in list:")
+  lst.append(l)
+  
+
+def add(a):
+  lst.append(a)
+  print(lst)
+
+def delete(a):
+  lst.remove(a)
+  print(lst)
+
+def contains(a):
+  if a in lst:
+    return true
+
+  else:
+    return 0
+
+def size():
+  print("size of list is",len(lst))
+  
+def iterator():
+  return iter(lst)
+  
+def inter(lst1,lst2):
+  for l in lst1:
+  if l in lst2:
+    lst3.append(l)
+    
+def union(lst1,lst2):
+  lst3=[]
+  for a in lst1:
+  if a not in lst2:
+    lst2.append(a)
+    print(lst2)
+
+def diff(lst1,lst2):
+  lst3=[]
+  for a in lst1:
+  if a not in lst2:
+   lst3.append(a)
+   print(lst3)
+   
+def subset():
+
+
+   
