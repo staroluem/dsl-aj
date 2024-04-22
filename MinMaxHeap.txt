@@ -1,0 +1,73 @@
+//heap
+#include<iostream>
+using namespace std;
+void minheap(int arr[],int i)
+{
+       int parent=(i-1)/2;
+       int cur=i;
+       while(parent>=0 && arr[parent]>arr[cur])
+	   {
+            swap(arr[parent],arr[cur]);
+            cur=parent;
+            parent=(cur-1)/2;
+       }
+}
+void maxheap(int arr[],int i)
+{
+       int parent=(i-1)/2;
+       int cur=i;
+       while(parent>=0 && arr[parent]<arr[cur])
+	   {
+            swap(arr[parent],arr[cur]);
+            cur=parent;
+            parent=(cur-1)/2;
+        }
+}    
+int main(){
+     int n,ch;
+     int a[20];
+     cout<<"enter the number of students:"<<endl;
+     cin>>n;
+     cout<<"enter the marks of students:"<<endl;
+     for(int i=0;i<n;i++){
+         cin>>a[i];
+         }
+     do{
+         cout<<"\nEnter your choice 1.minheap or 2.maxheap:";
+         cin>>ch;
+         switch(ch){
+            case 1:
+              for(int i=1;i<n;i++){
+                  minheap(a,i);
+                  }
+               cout<<"Min heap after inserting:";
+               for(int i=0;i<n;i++){
+                   cout<<a[i]<<" ";
+                   }
+                  cout<<endl;
+                   cout<<"\n Minimum marks of student:"<<a[0];
+                   break;
+                   
+             case 2:
+                for(int i=1;i<n;i++){
+                    maxheap(a,i);
+                    }
+                 cout<<"Max heap after inserting:";
+                 for(int i=0;i<n;i++){
+                   cout<<a[i]<<" ";
+                   }
+                  cout<<endl;
+                   cout<<"\n Maximum marks of student:"<<a[0];
+                   break;
+                   
+              case 3:exit(0);
+                 
+                   
+                   
+          
+            }
+          }while(ch!=3);
+      return 0;
+ }
+     
+   
