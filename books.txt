@@ -1,0 +1,187 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+
+struct node
+	{	struct node *next;
+		struct node *down;
+		char name[20];
+		int flag;
+	};
+class Book
+{
+public:
+	
+		char ch[20];int n,i;
+		node *root=NULL,*temp=NULL,*t1=NULL,*t2=NULL;
+		
+	
+public:
+	node *create();
+	void insertb();
+	void insertc();
+	void inserts();
+	void insertss();
+	void display();
+	
+};
+
+node *Book::create()
+{
+	node *p=new(struct node);
+	p->next=NULL;
+	p->down=NULL;
+	p->flag=0;
+	cout<<"\nenter title name:";
+	cin>>p->name;
+	return p;
+}
+void Book::insertb()
+{
+	if(root==NULL)
+	{
+	t1=create();
+	root=t1;
+	}
+	else
+	{	
+		cout<<"\nBook exist";
+	}
+}
+void Book::insertc()
+{
+	if(root==NULL)
+	{ 	cout<<"book is empty!";
+	}
+	else
+	{       cout<<"___________________________________"<<endl;
+		cout<<"How many chapter you want to insert?--->_"<<endl;
+		cin>>n;
+		for(i=0;i<n;i++)
+		{ 	
+			t1=create();
+			if(root->flag==0)
+			{
+				root->down=t1;
+				root->flag=1;
+			}
+			else
+			{
+				temp=root;
+				temp=temp->down;
+				while(temp->next!=NULL)
+				temp=temp->next;
+				temp->next=t1;
+			}
+		}
+	}
+}
+void Book::inserts()
+{
+	if(root==NULL)
+	{ 	cout<<"chapter is empty!";
+	}
+	else
+	{       cout<<"___________________________________"<<endl;
+		cout<<"How many sections you want to insert?--->_"<<endl;
+		cin>>n;
+		for(i=0;i<n;i++)
+		{ 	
+			t1=create();
+			if(root->flag==0)
+			{
+				root->down=t1;
+				root->flag=1;
+			}
+			else
+			{
+				temp=root;
+				temp=temp->down;
+				while(temp->next!=NULL)
+				temp=temp->next;
+				temp->next=t1;
+			}
+		}
+	}
+}
+void Book::insertss()
+{
+	if(root==NULL)
+	{ 	cout<<"section is empty!";
+	}
+	else
+	{       cout<<"___________________________________"<<endl;
+		cout<<"How many sub-sections you want to insert?--->_"<<endl;
+		cin>>n;
+		for(i=0;i<n;i++)
+		{ 	
+			t1=create();
+			if(root->flag==0)
+			{
+				root->down=t1;
+				root->flag=1;
+			}
+			else
+			{
+				temp=root;
+				temp=temp->down;
+				while(temp->next!=NULL)
+				temp=temp->next;
+				temp->next=t1;
+			}
+		}
+	}
+}
+void Book::display()
+{       if(root==NULL)
+	{
+		cout<<"no book!!!";
+	}
+	else
+	{
+	temp=root;
+	cout<<"\nbook name="<<temp->name;
+	if(temp->flag==1)
+	{
+		temp=temp->down;
+		while(temp!=NULL)
+		{
+			cout<<"\nchapter name="<<temp->name;
+			t1=temp;
+			if(t1->flag==1)
+			{
+				t1=t1->down;
+				while(t1!=NULL)
+				{cout<<"\nsection name="<<t1->name;
+				 t2=t1;
+				 if(t2->flag==1)
+				 { t2=t2->down;
+				 	while(t2!=NULL)
+				   	{
+				   		cout<<"\nsubsection name="<<t2->name;
+				   		t2=t2->next;
+				   	}
+				   
+					 }
+					 t1=t1->next;
+				 
+				 }
+			
+			}
+			temp=temp->next;
+		}
+		
+	}
+    }
+}
+	
+
+int main()
+{ 
+	Book b;
+	b.insertb();
+	b.insertc();
+	b.inserts();
+	b.insertss();
+	b.display();
+}
