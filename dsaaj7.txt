@@ -1,0 +1,153 @@
+#include<iostream>
+#include<fstream>
+#include<string>
+using namespace std;
+
+class seqfile
+{
+    
+    struct stud
+    {
+    	int rn;
+    	char nm[10];
+    	char div[2];
+    	string add;
+    }s;
+    public:
+    void add_data();
+    void display();
+    void search();
+    void del();
+    void modify();
+  
+ };
+ 
+ void seqfile::add_data()
+ {	
+ 	ofstream out;
+ 	out.open("student.data",ios::out|ios::binary);
+ 	int ans;
+ 	do{
+ 		cout<<"\nenter roll no:";
+ 		cin>>s.rn;
+ 		cout<<"\nenter name:";
+ 		cin>>s.nm;
+ 		cout<<"\nenter division:";
+ 		cin>>s.div;
+ 		cout<<"enter address:";
+ 		cin>>s.add;
+ 		out.write((char*)&s,sizeof(s));
+ 		cout<<"\ndo you want to add more(1) or not(0)?-->";
+ 		cin>>ans;
+ 	 }while(ans==1);
+ 	 
+ 	out.close();
+}
+void seqfile::display()
+{
+	ifstream in;
+	in.open("student.data",ios::in|ios::binary);
+	
+	while(in.read((char*)&s,sizeof(s)))
+	{	
+		cout<<"\n"<<s.rn<<"\t"<<s.nm<<"\t"<<s.div<<"\t"<<s.add;
+	}
+	in.close();
+	
+}
+void seqfile::search()
+{	ifstream in;
+	int flag=0;
+	in.open("student.data",ios::in|ios::binary);
+	int key;
+	cout<<"enter key:";
+	cin>>key;
+	
+	while(in.read((char*)&s,sizeof(s)))
+	{
+		if(s.rn==key)
+		{
+			cout<<"Record is present!!";
+			flag=1;
+			break;
+		}
+	}if(flag==0)
+	cout<<"Record not present!!";
+	
+	in.close();
+}
+void seqfile::del()
+{
+	ifstream in;
+	ofstream out;
+	in.open("student.data",ios::in|ios::binary);
+	out.open("newfile.data",ios::out|ios::binary);
+	int del_key;
+	cout<<"enter key:";
+	cin>>del_key;
+	
+	while(in.read((char*)&s,sizeof(s)))
+	{       if(del_key!=s.rn)
+		{
+			out.write((char*)&s,sizeof(s));
+		}
+	}
+	in.close();
+	out.close();
+	remove("student.data");
+	rename("newfile.data","student.data" );
+		  
+	display();
+}
+void seqfile::modify()
+{	
+	ifstream in;
+	ofstream out;
+	in.open("student.data",ios::in|ios::binary);
+	out.open("newfile.data",ios::out|ios::binary);
+	int key_to_modify;
+	cout<<"enter key:";
+	cin>>key_to_modify;
+	
+	while(in.read((char*)&s,sizeof(s)))
+	{       if(key_to_modify!=s.rn)
+		{
+			out.write((char*)&s,sizeof(s));
+		}
+	}
+	in.close();
+	out.close();
+	
+	
+	
+	
+int main()
+{
+        int ch,e;
+        seqfile o;
+     do{cout<<"--------file operations---------\n";
+        cout<<"1.add_information\n2.display\n3.search\n4.delete\n";
+        cin>>ch;
+      
+        switch(ch)
+        {
+        case 1:
+        o.add_data();
+        break;
+        case 2:
+        o.display();
+        break;
+        case 3:
+        o.search();
+        break;
+        case 4:
+        o.del();
+        break;
+        }
+        cout<<"\ndo u want more operations?-->";
+        cin>>e;
+       }while(e==1);
+	
+
+}
+	
