@@ -1,0 +1,235 @@
+
+#Linear probing
+def hash_function(telephone_number, size):
+    # Hash function based on the last 4 digits of the telephone number
+    last_four_digits = int(telephone_number) % 10000
+    return last_four_digits % size
+
+def insert(hash_table, name, telephone_number):
+    index = hash_function(telephone_number, len(hash_table))
+    if hash_table[index] is None:
+        hash_table[index] = (name, telephone_number)
+    else:
+        # Linear probing to find next available slot
+        while hash_table[index] is not None:
+            index = (index + 1) % len(hash_table)
+        hash_table[index] = (name, telephone_number)
+
+def search(hash_table, telephone_number):
+    index = hash_function(telephone_number, len(hash_table))
+    while hash_table[index] is not None:
+        if hash_table[index][1] == telephone_number:
+            return index
+        index = (index + 1) % len(hash_table)
+    return None
+
+def delete(hash_table, telephone_number):
+    index = search(hash_table, telephone_number)
+    if index is not None:
+        hash_table[index] = None
+        print("Record with telephone number {} deleted successfully.".format(telephone_number))
+    else:
+        print("Record with telephone number {} not found.".format(telephone_number))
+
+def display(hash_table):
+    print("Hash Table:")
+    for i, record in enumerate(hash_table):
+        if record is not None:
+            print("[{}] -> Name: {}, Telephone: {}".format(i, record[0], record[1]))
+        else:
+            print("[{}] -> None".format(i))
+
+# Example usage
+size = 10
+hash_table = [None] * size
+
+while True:
+    print("\n1. Insert")
+    print("2. Delete")
+    print("3. Search")
+    print("4. Display")
+    print("5. Exit")
+    
+    choice = int(input("Enter your choice: "))
+    
+    if choice == 1:
+        name = input("Enter name: ")
+        telephone_number = input("Enter telephone number: ")
+        insert(hash_table, name, telephone_number)
+    elif choice == 2:
+        telephone_number = input("Enter telephone number to delete: ")
+        delete(hash_table, telephone_number)
+    elif choice == 3:
+        telephone_number = input("Enter telephone number to search: ")
+        index = search(hash_table, telephone_number)
+        if index is not None:
+            print("Record found at index {}.".format(index))
+        else:
+            print("Record not found.")
+    elif choice == 4:
+        display(hash_table)
+    elif choice == 5:
+        print("Exiting...")
+        break
+    else:
+        print("Invalid choice. Please choose again.")
+
+#Quadratic_probing
+
+def hash_function(telephone_number, size):
+    # Hash function based on the last 4 digits of the telephone number
+    last_four_digits = int(telephone_number) % 10000
+    return last_four_digits % size
+
+def insert(hash_table, name, telephone_number):
+    index = hash_function(telephone_number, len(hash_table))
+    if hash_table[index] is None:
+        hash_table[index] = (name, telephone_number)
+    else:
+        # Quadratic probing to find next available slot
+        i = 1
+        while hash_table[(index + i * i) % len(hash_table)] is not None:
+            i += 1
+        hash_table[(index + i * i) % len(hash_table)] = (name, telephone_number)
+
+def search(hash_table, telephone_number):
+    index = hash_function(telephone_number, len(hash_table))
+    i = 0
+    while hash_table[(index + i * i) % len(hash_table)] is not None:
+        if hash_table[(index + i * i) % len(hash_table)][1] == telephone_number:
+            return (index + i * i) % len(hash_table)
+        i += 1
+    return None
+
+def delete(hash_table, telephone_number):
+    index = search(hash_table, telephone_number)
+    if index is not None:
+        hash_table[index] = None
+        print("Record with telephone number {} deleted successfully.".format(telephone_number))
+    else:
+        print("Record with telephone number {} not found.".format(telephone_number))
+
+def display(hash_table):
+    print("Hash Table:")
+    for i, record in enumerate(hash_table):
+        if record is not None:
+            print("[{}] -> Name: {}, Telephone: {}".format(i, record[0], record[1]))
+        else:
+            print("[{}] -> None".format(i))
+
+# Example usage
+size = 10
+hash_table = [None] * size
+
+while True:
+    print("\n1. Insert")
+    print("2. Delete")
+    print("3. Search")
+    print("4. Display")
+    print("5. Exit")
+    
+    choice = int(input("Enter your choice: "))
+    
+    if choice == 1:
+        name = input("Enter name: ")
+        telephone_number = input("Enter telephone number: ")
+        insert(hash_table, name, telephone_number)
+    elif choice == 2:
+        telephone_number = input("Enter telephone number to delete: ")
+        delete(hash_table, telephone_number)
+    elif choice == 3:
+        telephone_number = input("Enter telephone number to search: ")
+        index = search(hash_table, telephone_number)
+        if index is not None:
+            print("Record found at index {}.".format(index))
+        else:
+            print("Record not found.")
+    elif choice == 4:
+        display(hash_table)
+    elif choice == 5:
+        print("Exiting...")
+        break
+    else:
+        print("Invalid choice. Please choose again.")
+
+#Double Hashing
+
+def hash_function(telephone_number, size):
+    # Hash function based on the last 4 digits of the telephone number
+    last_four_digits = int(telephone_number) % 10000
+    return last_four_digits % size
+
+def hash_function_2(telephone_number, size):
+    # Secondary hash function for double hashing
+    return 7 - (int(telephone_number) % 7)
+
+def insert(hash_table, name, telephone_number):
+    index = hash_function(telephone_number, len(hash_table))
+    if hash_table[index] is None:
+        hash_table[index] = (name, telephone_number)
+    else:
+        # Double hashing to find next available slot
+        i = 1
+        while hash_table[(index + i * hash_function_2(telephone_number, len(hash_table))) % len(hash_table)] is not None:
+            i += 1
+        hash_table[(index + i * hash_function_2(telephone_number, len(hash_table))) % len(hash_table)] = (name, telephone_number)
+
+def search(hash_table, telephone_number):
+    index = hash_function(telephone_number, len(hash_table))
+    i = 0
+    while hash_table[(index + i * hash_function_2(telephone_number, len(hash_table))) % len(hash_table)] is not None:
+        if hash_table[(index + i * hash_function_2(telephone_number, len(hash_table))) % len(hash_table)][1] == telephone_number:
+            return (index + i * hash_function_2(telephone_number, len(hash_table))) % len(hash_table)
+        i += 1
+    return None
+
+def delete(hash_table, telephone_number):
+    index = search(hash_table, telephone_number)
+    if index is not None:
+        hash_table[index] = None
+        print("Record with telephone number {} deleted successfully.".format(telephone_number))
+    else:
+        print("Record with telephone number {} not found.".format(telephone_number))
+
+def display(hash_table):
+    print("Hash Table:")
+    for i, record in enumerate(hash_table):
+        if record is not None:
+            print("[{}] -> Name: {}, Telephone: {}".format(i, record[0], record[1]))
+        else:
+            print("[{}] -> None".format(i))
+
+# Example usage
+size = 10
+hash_table = [None] * size
+
+while True:
+    print("\n1. Insert")
+    print("2. Delete")
+    print("3. Search")
+    print("4. Display")
+    print("5. Exit")
+    
+    choice = int(input("Enter your choice: "))
+    
+    if choice == 1:
+        name = input("Enter name: ")
+        telephone_number = input("Enter telephone number: ")
+        insert(hash_table, name, telephone_number)
+    elif choice == 2:
+        telephone_number = input("Enter telephone number to delete: ")
+        delete(hash_table, telephone_number)
+    elif choice == 3:
+        telephone_number = input("Enter telephone number to search: ")
+        index = search(hash_table, telephone_number)
+        if index is not None:
+            print("Record found at index {}.".format(index))
+        else:
+            print("Record not found.")
+    elif choice == 4:
+        display(hash_table)
+    elif choice == 5:
+        print("Exiting...")
+        break
+    else:
+        print("Invalid choice. Please choose again.")
