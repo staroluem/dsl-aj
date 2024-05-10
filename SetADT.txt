@@ -1,0 +1,67 @@
+from SetOperations import SetADT
+
+def display_menu():
+    print("----------- Menu -------------")
+    print("1. Add Element")
+    print("2. Remove Element")
+    print("3. Check if an Element is in the Set")
+    print("4. Size")
+    print("5. Intersection")
+    print("6. Union")
+    print("7. Difference")
+    print("8. Subset")
+    print("9. Exit")
+
+def main():
+    set1 = SetADT()
+
+    while True:
+        display_menu()
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            element = input("Enter element to add: ")
+            set1.add(element)
+        elif choice == '2':
+            element = input("Enter element to remove: ")
+            set1.remove(element)
+        elif choice == '3':
+            element = input("Enter element to check: ")
+            print("Element is present in the set:", set1.contains(element))
+        elif choice == '4':
+            print("Size of the set:", set1.size())
+        elif choice == '5':
+            print("Iterator for the set:", list(set1.iterator()))
+        elif choice == '6':
+            other_set = SetADT()
+            element = input("Enter elements of other set separated by spaces: ").split()
+            for e in element:
+                other_set.add(e)
+            print("Intersection with other set:", list(set1.intersection(other_set).iterator()))
+        elif choice == '7':
+            other_set = SetADT()
+            element = input("Enter elements of other set separated by spaces: ").split()
+            for e in element:
+                other_set.add(e)
+            print("Union with other set:", list(set1.union(other_set).iterator()))
+        elif choice == '8':
+            other_set = SetADT()
+            element = input("Enter elements of other set separated by spaces: ").split()
+            for e in element:
+                other_set.add(e)
+            print("Difference with other set:", list(set1.difference(other_set).iterator()))
+        elif choice == '9':
+            other_set = SetADT()
+            element = input("Enter elements of other set separated by spaces: ").split()
+            for e in element:
+                other_set.add(e)
+            print("Is the set a subset of the other set?", set1.is_subset(other_set))
+        elif choice == '0':
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please enter a valid option.")
+
+
+if _name_ == "_main_":
+    main()
