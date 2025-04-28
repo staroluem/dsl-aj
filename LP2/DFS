@@ -1,3 +1,11 @@
+graph={}
+num = int(input("Enter no. of nodes:"))
+for _ in range(num):
+    node = input("Enter node:")
+    neigh = input("Enter neigh:")
+    graph[node]=neigh.split()
+print(graph)
+
 graph = {
     'A': ['B', 'C'],
     'B': ['D', 'E'],
