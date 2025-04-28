@@ -1,0 +1,29 @@
+import random
+print("Hello!, I'm Your chaybot")
+
+while True:
+    user = input("You:").lower()
+
+    if user == 'bye':
+        print("Chatbot: Have a nice day!")
+        break
+    elif 'hello' in user or 'hi' in user:
+        response = [
+            "Chatbot: Hello! how can I help you?",
+            "Chatbot: Hello! ",
+            "Chatbot: Hi!!, You need some help, just ask me!"]
+        print(random.choice(response))
+    elif 'define ai' in user:
+        response = [
+            "Chatbot: AI stand for Artificial Intelligence",
+            "Chatbot: It is field of creating intelligent system using different agents.",
+            "Chatbot: AI works for making human needs easy by creating intelligent machines which run without human intervention."]
+        print(random.choice(response))
+    elif 'application of ai' in user:
+        response = [
+            "Chatbot: gemini",
+            "Chatbot: alexa",
+            "Chatbot: OpenAI"]
+        print(random.choice(response))
+    else:
+        print("Chatbot: I am not sure how to respond to that")
